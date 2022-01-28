@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Inport Material icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css" media="screen,projection" />
+    <!-- Import Style.css -->
+    <link type="text/css" rel="stylesheet" href="../../static/style/styleCss.css">
+    <title>Adcionar Evento</title>
+</head>
+
+<body class=" grey lighten-4">
+    <!-- Site navigation -->
+    <nav>
+        <div class="nav-wrapper">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="/eventos"><i class="material-icons left ">list</i>Listar Eventos</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Main content of the site -->
+        <div class="row container">
+            <!-- event registration form  -->
+            <form method="post" class="container">
+                <h1 class="center-align">Cadastrar Eventos</h1>
+                <blockquote>
+                    <p>Preencha os capmos com as informações requeridas. </p>
+                </blockquote>
+
+                <!-- Validation mensage -->
+                <th:block th:include="mensagemValidacao"></th:block>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">title</i>
+                        <input type="text" value="" name="nome" placeholder="Nome do evento" class="validate">
+                        <label for="icon_prefix">Nome:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">room</i>
+                        <input type="text" value="" name="local" placeholder="Local do evento" class="validate">
+                        <label for="icon_prefix">Local:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">event</i>
+                        <input type="text" class="datepicker" value="" name="data" placeholder="Ex: 24-12-2021">
+                        <label for="icon_prefix">Data:</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">access_time</i>
+                        <input type="text" class="timepicker" value="" name="horario" placeholder="Ex: 8:30 AM">
+                        <label for="icon_prefix">Horário</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="btn waves-effect waves-light green">Salvar
+                        <i class="material-icons right">check_circle_outline</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.datepicker');
+            var instances = M.Datepicker.init(elems, {
+                format: 'dd-mm-yyyy'
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.timepicker');
+            var instances = M.Timepicker.init(elems, {
+                showClearBtn: true
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../../static/style/styleCss.css">
+    <title>Detalhes do evento</title>
+</head>
+
+<body class="grey lighten-4">
+    <!-- Site navigation -->
+    <nav>
+        <div class="nav-wrapper">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="/cadastrarEvento"><i
+                            class="material-icons left ">add_circle</i>Cadastrar
+                        Evento</a>
+                </li>
+                <li>
+                    <a href="/eventos"><i class="material-icons left ">list</i>Listar Eventos</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <h2 class="center-align">Detalhes de <span th:text="${evento.nome}"></span></h2>
+            <div th:each="evento : ${evento}">
+                <ul class="collection container">
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle red">title</i>
+                        <p>Nome:</p>
+                        <span th:text="${evento.nome}"></span>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle red">room</i>
+                        <p>Local:</p>
+                        <span th:text="${evento.local}"></span>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle red">event</i>
+                        <p>Data:</p>
+                        <span th:text="${evento.data}"></span>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle red">access_time</i>
+                        <p>Horário:</p>
+                        <span th:text="${evento.horario}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <section>
+        <div class="container">
+            <div class="container">
+                <h5>Adicionar um convidado</h5>
+                <blockquote>
+                    <p>Adicione um novo convidado para o evento.</p>
+                </blockquote>
+            </div>
+            <th:block th:include="mensagemValidacao"></th:block>
+            <form method="post" class="container">
+                Nome:<input type="text" value="" name="nomeConvidado" placeholder="Nome do evento">
+                Rg:<input type="text" value="" name="rg" placeholder="Ex: CE-xx.xxx.xxx-x">
+                Idade:<input type="text" value="" name="idadeConvidado" placeholder="Ex: 28">
+
+                <button type="submit" class="btn waves-effect waves-light green">Salvar
+                    <i class="material-icons right">check_circle_outline</i>
+                </button>
+            </form>
+        </div>
+    </section>
+    <br>
+
+    <section>
+        <div class="container">
+            <h4 class="center-align">Lista de convidados</h4>
+            <table class="container">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                        <th>Rg</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="convidado : ${convidados}">
+                        <td><span th:text="${convidado.nomeConvidado}"></span></td>
+                        <td><span th:text="${convidado.idadeConvidado}"></td>
+                        <td><span th:text="${convidado.rg}"></td>
+                        <td>
+                            <a class="btn red darken-1"
+                                th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidado.rg)).build()}"><i
+                                    class="material-icons">delete</i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
